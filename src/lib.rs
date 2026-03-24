@@ -6,6 +6,12 @@
 //! free-text LLM claims to the minimum set of Julia/Rust verification backends
 //! required for the detected domain (Chemistry, Mathematics, Digital Logic).
 //!
+//! ## Provenance
+//!
+//! Extracted from Eagle-Lander, the author's own private neuromorphic GPU supervisor
+//! repository (closed-source). The AHL router verified LLM-generated trade reasoning
+//! in production before being open-sourced as a standalone crate.
+//!
 //! ## Quick start
 //!
 //! ```rust
