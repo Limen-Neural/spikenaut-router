@@ -195,7 +195,7 @@ impl SynapticMesh {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use crate::topology::generators::{generate_layered, generate_random, generate_small_world};
+    use crate::topology::{generate_layered, generate_random, generate_small_world};
 
     #[test]
     fn propagate_length_mismatch_rejected() {

@@ -11,13 +11,14 @@
 //! | [`delay`] | Temporal delay infrastructure — ring-buffer spike queues for tick-aligned delivery with configurable axonal propagation delays |
 //! | [`mesh`] | [`SynapticMesh`] orchestrator — the top-level struct owning topology + delays, provides `propagate()` for spike → current conversion |
 //! | [`sparse`] | Compressed Sparse Row (CSR) synaptic maps for GPU-optimized weight matrices |
-//! | [`router`] | AHL (Anti-Hallucination Layer) router — a consumer of synaptic wiring for LLM domain routing |
+//! | [`router`] | AHL (Anti-Hallucination Layer) router — uses a bank of dynamic GIF neurons for LLM domain routing |
+//! | [`gif`] | Generalized Integrate-and-Fire (GIF) neuron model with threshold adaptation |
 //!
 //! ## Quick start
 //!
 //! ```rust
-//! use synapse_router::topology::generators::generate_small_world;
-//! use synapse_router::mesh::SynapticMesh;
+//! use synaptic_mesh::topology::generate_small_world;
+//! use synaptic_mesh::mesh::SynapticMesh;
 //!
 //! // Build a 256-neuron small-world network with delays up to 5 ticks
 //! let graph = generate_small_world(256, 6, 0.2, 5, 0.2).unwrap();
@@ -57,7 +58,11 @@
 //!
 //! ## References
 //!
-//! **LIF neuron model:**
+//! **GIF neuron model (Generalized Integrate-and-Fire):**
+//! - Gerstner, W., & Kistler, W. M. (2002). *Spiking Neuron Models: Single Neurons, Populations, Plasticity.* Cambridge University Press.
+//! - Mihalaş, Ş., & Niebur, E. (2009). A generalized linear integrate-and-fire neural model with diverse dynamics. *Neural Computation*.
+//!
+//! **Original LIF neuron model references:**
 //! - Lapicque, L. (1907). *Recherches quantitatives sur l'excitation électrique des
 //!   nerfs traitée comme une polarisation.* Journal de Physiologie et de Pathologie
 //!   Générale, 9, 620–635.
@@ -90,6 +95,7 @@ pub mod error;
 pub mod mesh;
 pub mod topology;
 pub mod types;
+pub mod gif;
 
 // ── Existing modules: router + sparse maps ────────────────────────────────────
 pub mod router;
